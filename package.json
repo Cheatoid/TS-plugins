@@ -1,0 +1,34 @@
+{
+  "name": "@cheatoid/ts-plugins",
+  "version": "0.1.0",
+  "description": "General-purpose TypeScript plugins/transformers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cheatoid/TS-plugins.git"
+  },
+  "homepage": "https://github.com/Cheatoid/TS-plugins#readme",
+  "author": "Cheatoid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cheatoid/TS-plugins/issues"
+  },
+  "keywords": [
+    "typescript",
+    "plugins",
+    "extensions",
+    "transformers"
+  ],
+  "files": [
+    "*.{d.ts,js,ts}"
+  ],
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "npx tsc --watch"
+  },
+  "peerDependencies": {
+    "typescript": ">= 4.9.5 < 5"
+  },
+  "engines": {
+    "node": ">= 18"
+  }
+}
