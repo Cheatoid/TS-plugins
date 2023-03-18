@@ -45,6 +45,6 @@ jobs:
           release_name: TS-plugins ${{ github.ref_name }}
           body: "**Full Changelog**: ${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PRIOR_TAG }}...${{ github.ref_name }}\n---\n${{ steps.changelog.outputs.changelog }}"
           draft: false
-          prerelease: ${{ contains(github.ref, "-alpha") || contains(github.ref, "-beta") }}
+          prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}
       - name: Publish package
         run: npm publish --access public
