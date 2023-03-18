@@ -1,17 +1,28 @@
-name: Publish
+name: Publish Release
 on:
   push:
     tags:
       - "v*"
 jobs:
-  npm-publish:
-    name: Publish to NPM
+  publish-release:
+    name: Publish Release
     runs-on: ubuntu-latest
     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - name: Setup environment variables
+        run: echo "PRIOR_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+      # - name: Generate changelog
+      #   id: changelog
+      #   uses: metcalfc/changelog-generator@v4.1.0
+      #   with:
+      #     myToken: ${{ env.GITHUB_TOKEN }}
+      #     fetch: false
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
@@ -23,5 +34,14 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Create release
+        uses: actions/create-release@master
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: TS-plugins ${{ github.ref_name }}
+          # body: ${{ steps.changelog.outputs.changelog }}
+          body: "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ env.PRIOR_TAG }}...${{ github.ref_name }}"
+          draft: false
+          prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}
       - name: Publish package
         run: npm publish --access public
