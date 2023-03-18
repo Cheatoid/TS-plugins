@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/ts-plugins",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "General-purpose TypeScript plugins/transformers",
   "repository": {
     "type": "git",

@@ -3,8 +3,10 @@ on:
   push:
     tags:
       - "v*"
+
 permissions:
   contents: write
+
 jobs:
   publish-release:
     name: Publish Release
