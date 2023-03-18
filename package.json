@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/ts-plugins",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "General-purpose TypeScript plugins/transformers",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "transformers"
   ],
   "files": [
-    "*.{d.ts,js,ts}"
+    "*.js"
   ],
   "scripts": {
     "build": "npx tsc",
