@@ -22,17 +22,12 @@ jobs:
           fetch-depth: 0
       - name: Setup environment variables
         run: |
-          echo "PRIOR_TAG_HASH=$(git rev-list --tags --skip=1 --max-count=1)" >> $GITHUB_ENV
-          echo "PRIOR_TAG=$(git describe --tags --abbrev=0 $PRIOR_TAG_HASH)" >> $GITHUB_ENV
           echo "LATEST_TAG=$(curl -qsSL \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ env.GITHUB_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "${{ github.api_url }}/repos/${{ github.repository }}/releases/latest" \
           | jq -r .tag_name)" >> $GITHUB_ENV
-          echo "PRIOR_TAG_HASH: $PRIOR_TAG_HASH"
-          echo "PRIOR_TAG: $PRIOR_TAG"
-          echo "LATEST_TAG: $LATEST_TAG"
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
