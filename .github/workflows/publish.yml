@@ -17,14 +17,12 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0
-      - name: Setup environment variables
-        run: echo "PRIOR_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-      # - name: Generate changelog
-      #   id: changelog
-      #   uses: metcalfc/changelog-generator@v4.1.0
-      #   with:
-      #     myToken: ${{ env.GITHUB_TOKEN }}
-      #     fetch: false
+      - name: Generate changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v4.1.0
+        with:
+          myToken: ${{ env.GITHUB_TOKEN }}
+          fetch: false
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
@@ -41,8 +39,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: TS-plugins ${{ github.ref_name }}
-          # body: ${{ steps.changelog.outputs.changelog }}
-          body: "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ env.PRIOR_TAG }}...${{ github.ref_name }}"
+          body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}
       - name: Publish package
