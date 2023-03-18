@@ -67,10 +67,7 @@ const transformer = (): ts.TransformerFactory<ts.SourceFile> => (context: ts.Tra
         );*/
       }
       return Number.isFinite(value)
-        ? (value < 0 ? context.factory.createPrefixUnaryExpression(
-          ts.SyntaxKind.MinusToken,
-          context.factory.createNumericLiteral(-value)
-        ) : context.factory.createNumericLiteral(value))
+        ? context.factory.createNumericLiteral(value)
         : (value < 0 ?
           /*context.factory.createBinaryExpression(
             context.factory.createNumericLiteral(-1),
