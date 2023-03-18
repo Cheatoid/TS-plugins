@@ -17,6 +17,10 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0
+      - name: Setup environment variables
+        run: |
+          echo "PRIOR_TAG_HASH=`echo $(git rev-list --tags --skip=1 --max-count=1)`" >> $GITHUB_ENV
+          echo "PRIOR_TAG=`echo $(git describe --tags --abbrev=0 $PRIOR_TAG_HASH)`" >> $GITHUB_ENV
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
@@ -39,8 +43,8 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: TS-plugins ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: "**Full Changelog**: ${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PRIOR_TAG }}...${{ github.ref_name }}\n---\n${{ steps.changelog.outputs.changelog }}"
           draft: false
-          prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') }}
+          prerelease: ${{ contains(github.ref, "-alpha") || contains(github.ref, "-beta") }}
       - name: Publish package
         run: npm publish --access public
