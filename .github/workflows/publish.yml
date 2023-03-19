@@ -33,7 +33,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
         with:
-          myToken: $GITHUB_TOKEN
+          myToken: ${{ env.GITHUB_TOKEN }}
           fetch: false
       - name: Setup Node.js
         uses: actions/setup-node@master
