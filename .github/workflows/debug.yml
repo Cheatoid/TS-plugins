@@ -1,0 +1,29 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+    inputs:
+      printContext:
+        description: "Dump GitHub context"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        if: github.event.inputs.printContext
+        run: echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Get repository name
+        id: repo-basename
+        run: echo "value=`basename ${{ github.repository }}`" >> $GITHUB_OUTPUT
+        shell: bash
+      - name: Print repository name
+        run: |
+          echo "Repository name: ${{ steps.repo-basename.outputs.value }}"
