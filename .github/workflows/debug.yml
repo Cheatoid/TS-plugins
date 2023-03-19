@@ -51,7 +51,7 @@ jobs:
         uses: actions/create-release@master
         with:
           tag_name: ${{ github.ref }}
-          release_name: $REPO_NAME ${{ github.ref_name }}
-          body: "**Full Changelog**: ${{ github.event.repository.html_url }}/compare/$LATEST_TAG...${{ github.ref_name }}"
+          release_name: ${{ env.REPO_NAME }} ${{ github.ref_name }}
+          body: "**Full Changelog**: ${{ github.event.repository.html_url }}/compare/${{ env.LATEST_TAG }}...${{ github.ref_name }}"
           draft: true
           prerelease: true
