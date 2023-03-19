@@ -55,3 +55,14 @@ jobs:
           body: "**Full Changelog**: ${{ github.event.repository.html_url }}/compare/${{ env.LATEST_TAG }}...${{ github.ref_name }}"
           draft: true
           prerelease: true
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.x"
+      - name: Run automation script
+        run: cd ./.github/automation & npm start
+        shell: bash
+        env:
+          MY_NAME: ${{ github.repository }}

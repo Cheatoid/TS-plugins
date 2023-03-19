@@ -29,3 +29,6 @@ Modify your `tsconfig.json` (replace the `INSERT-TRANSFORM-NAME` accordingly):
 `{ "transform": "@cheatoid/ts-plugins/constant-folding.js" }`
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Constant_folding) for explanation.
+
+#### Additional Options
+`evaluateMath`: Set to `true` to enable `Math` library evaluation (when possible).

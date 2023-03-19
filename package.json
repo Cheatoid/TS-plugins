@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/ts-plugins",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "General-purpose TypeScript plugins/transformers",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "dev": "npx tsc --watch"
   },
   "peerDependencies": {
-    "typescript": ">= 4.9.5 < 5"
+    "typescript": ">= 5.0.2 < 6"
   },
   "engines": {
     "node": ">= 18"
