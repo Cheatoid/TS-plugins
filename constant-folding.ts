@@ -61,7 +61,7 @@ function trySimplifyNode(node: ts.Expression, options: PluginOptions): number | 
   }
   if (options.evaluateMath) {
     if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === "Math" && ts.isIdentifier(node.name)) {
-      switch (node.name.text) { // ADDED
+      switch (node.name.text) {
         case "E":
           return Math.E;
         case "LN10":
